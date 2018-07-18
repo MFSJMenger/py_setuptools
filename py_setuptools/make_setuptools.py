@@ -24,7 +24,6 @@ def compile_software(*args, **kwargs):
     # execute the command
     path = os.getcwd()
     # 
-    print("I execute: '%s'" % settings['command'])
     subprocess.check_call(settings['command'], cwd=path, shell=True)
 
 

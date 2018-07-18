@@ -1,3 +1,4 @@
+from __future__ import print_function
 #
 from setuptools import setup, Extension
 # modified calls
@@ -10,9 +11,12 @@ import subprocess
 # partial
 from functools import partial
 
-global_command = 'make'
+settings = {
+    'command' : 'make',
+}
 
-def compile_software(command='make', *args, **kwargs):
+
+def compile_software(*args, **kwargs):
     """
     Used subprocess module to execute the command
     to compile/install your libraries
@@ -20,21 +24,22 @@ def compile_software(command='make', *args, **kwargs):
     # execute the command
     path = os.getcwd()
     # 
-    subprocess.check_call(command, cwd=path, shell=True)
+    print("I execute: '%s'" % settings['command'])
+    subprocess.check_call(settings['command'], cwd=path, shell=True)
 
 
 class CustomInstall(install):
     """Custom handler for the 'install' command"""
 
     def run(self):
-        compile_software(command=global_command)
+        compile_software()
         super().run()
 
 class CustomBuildExt(build_ext):
     """Custom handler for the 'install' command"""
 
     def run(self):
-        compile_software(command=global_command)
+        compile_software()
         super().run()
 
 setup = partial(setup, cmdclass= {

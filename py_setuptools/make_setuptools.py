@@ -12,7 +12,9 @@ import subprocess
 from functools import partial
 
 settings = {
+
     'command' : 'make',
+    'cmd_path' : None,
 }
 
 
@@ -22,7 +24,10 @@ def compile_software(*args, **kwargs):
     to compile/install your libraries
     """
     # execute the command
-    path = os.getcwd()
+    if settings['cmd_path'] is None:
+        path = os.getcwd()
+    else:
+        path = settings['cmd_path']
     # 
     subprocess.check_call(settings['command'], cwd=path, shell=True)
 

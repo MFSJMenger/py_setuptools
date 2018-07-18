@@ -32,14 +32,14 @@ class CustomInstall(install):
 
     def run(self):
         compile_software()
-        super().run()
+        super(CustomInstall, self).run()
 
 class CustomBuildExt(build_ext):
     """Custom handler for the 'install' command"""
 
     def run(self):
         compile_software()
-        super().run()
+        super(CustomBuildExt, self).run()
 
 setup = partial(setup, cmdclass= {
     'install' : CustomInstall,

@@ -27,14 +27,14 @@ def compile_software(*args, **kwargs):
     subprocess.check_call(settings['command'], cwd=path, shell=True)
 
 
-class CustomInstall(install):
+class CustomInstall(install, object):
     """Custom handler for the 'install' command"""
 
     def run(self):
         compile_software()
         super(CustomInstall, self).run()
 
-class CustomBuildExt(build_ext):
+class CustomBuildExt(build_ext, object):
     """Custom handler for the 'install' command"""
 
     def run(self):
